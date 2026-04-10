@@ -1,6 +1,6 @@
 #include "gdt.h"
 
-extern void gdt_flush(uint32_t gdt_ptr_addr);
+extern void gdt_flush(uint32_t);
 
 struct gdt_entry gdt[5];
 struct gdt_ptr gptr;
