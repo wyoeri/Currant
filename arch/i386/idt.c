@@ -1,6 +1,7 @@
 #include "idt.h"
 
-#include "isr.h"
+#include "arch/i386/isr.h"
+#include "arch/i386/io.h"
 
 extern void idt_load(uint32_t);
 

@@ -1,6 +1,8 @@
 #include "isr.h"
 
 #include "src/drivers/vga.h"
+#include "arch/i386/io.h"
+#include "src/drivers/keyboard.h"
 
 static int in_handler = 0;
 
@@ -42,13 +44,18 @@ static const char* error_message[] = {
 };
 
 void isr_handler(struct registers* regs){
-    if(regs->int_no > 32 && regs->int_no < 47){
-        if(regs->int_no >= 40) {outb(0xA0, 0x20);}
-        outb(0x20, 0x20);
-        return;
-    }
+    if(regs->int_no >= 32 && regs->int_no < 47){
+        if(regs->int_no == 33){
+            handler_keyboard();
+        }
 
-    if(regs->int_no == 32) {
+        if(regs->int_no == 32) {
+            outb(0x20, 0x20);
+            return;
+        }
+
+        if(regs->int_no >= 40) {outb(0xA0, 0x20);}
+
         outb(0x20, 0x20);
         return;
     }
@@ -63,10 +70,13 @@ void isr_handler(struct registers* regs){
     if(regs->int_no < 32){
         print_str_vga("EXCEPTION: ");
         print_str_vga(error_message[regs->int_no]);
+        print_char_vga('\n');
         print_hex_vga(regs->int_no);
     }
     else{
         print_str_vga("UNKNOWN EXCEPTION!\n");
+        print_char_vga('\n');
+        print_hex_vga(regs->int_no);
     }
 
     for(;;);

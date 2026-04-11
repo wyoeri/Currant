@@ -31,5 +31,3 @@ cmake-build-*/
 *.qcow2
 *.vdi
 *.vmdk
-
-isodir/

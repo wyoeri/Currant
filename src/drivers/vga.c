@@ -20,6 +20,12 @@ void print_char_vga(const char c){
     else if('\t' == c){
         tcp.y += 4;
     }
+    else if('\b' == c){
+        tcp.y--;
+        uint32_t offset = calc_offset_vga();
+        vga_buffer[offset] = '\0';
+        vga_buffer[offset + 1] = WHITE_COLOR;
+    }
     else{
         uint32_t offset = calc_offset_vga();
         vga_buffer[offset] = c;

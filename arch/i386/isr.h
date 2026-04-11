@@ -57,10 +57,6 @@ struct registers{
     uint32_t ss;
 };
 
-static inline void outb(uint16_t port, uint8_t val){
-    asm volatile("outb %0, %w1" : : "a"(val), "Nd"(port));
-}
-
 void isr_handler(struct registers* regs);
 
 #endif
