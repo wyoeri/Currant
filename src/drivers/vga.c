@@ -11,7 +11,7 @@ void init_vga(void){
 // linear output
 void print_char_vga(const char c){
     if(tcp.y >= 80 || tcp.x >= 25){tcp.y = 0; tcp.x++;}
-    if(tcp.x >= 25){tcp.x = 0;}
+    if(tcp.x >= 25){clear_screen_vga(); tcp.x = 0;}
 
     if('\n' == c){
         tcp.y = 0; 
