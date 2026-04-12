@@ -21,15 +21,16 @@ typedef struct{
 void init_vga(void);
 
 // linear output
-void print_char_vga(const char c, uint8_t color_vga);
-void print_str_vga(const char* s, uint8_t color_vg);
+void print_char_vga(const char c);
+void print_str_vga(const char* s);
 
 // output by coordinates
-void print_by_coord_char_vga(const char c, uint8_t color_vga, int y, int x);
-void print_by_coord_str_vga(const char* s, uint8_t color_vga, int y, int x);
+void print_by_coord_char_vga(const char c, int y, int x);
+void print_by_coord_str_vga(const char* s, int y, int x);
 
 // other
-void clear_screen_vga(uint8_t color_vga);
+void clear_screen_vga(void);
 uint32_t calc_offset_vga(void);
+void set_fill_color_vga(uint8_t color);
 
 #endif
