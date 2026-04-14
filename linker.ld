@@ -33,9 +33,8 @@ SECTIONS
     {
         *(COMMON)
         *(.bss)
-        ebss = .;
     }
-
+    ebss = .;
     /DISCARD/ :
     {
         *(.comment)

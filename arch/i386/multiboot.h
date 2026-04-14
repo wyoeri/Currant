@@ -15,7 +15,7 @@ typedef struct{
     uint32_t size;
     uint32_t addr;
     uint32_t shndx;
-    uint32_t mmap_length;
+    uint32_t mmap_len;
     uint32_t mmap_addr;
     uint32_t drives_length;
     uint32_t drives_addr;
@@ -36,5 +36,7 @@ typedef struct{
     uint64_t len;
     uint32_t type;
 } __attribute__((packed)) mmap_multiboot_info;
+
+uint32_t get_max_address(multiboot_info* mbi);
 
 #endif
