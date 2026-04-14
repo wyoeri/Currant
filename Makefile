@@ -23,6 +23,8 @@ OBJ = $(BUILD_DIR)/boot.o \
 	$(BUILD_DIR)/commands.o \
 	$(BUILD_DIR)/string.o \
 	$(BUILD_DIR)/paging.o \
+	$(BUILD_DIR)/multiboot.o \
+	$(BUILD_DIR)/pmm.o \
 	$(BUILD_DIR)/ringbuffer.o \
     $(BUILD_DIR)/statistics.o \
 	$(BUILD_DIR)/print.o \

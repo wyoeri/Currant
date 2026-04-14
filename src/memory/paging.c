@@ -1,9 +1,14 @@
 #include "paging.h"
 
-static volatile uint32_t page_directory[1024] __attribute__((aligned(4096))) = {0};
-static volatile uint32_t page_table[1024] __attribute__((aligned(4096))) = {0};
+#include "src/memory/pmm.h"
+
+static volatile uint32_t* page_directory;
+static volatile uint32_t* page_table;
 
 void init_paging(void){
+    page_directory = (uint32_t*)alloc_pmm();
+    page_table = (uint32_t*)alloc_pmm();
+
     for(int i = 0; i < 1024; i++){
         page_table[i] = (i * 4096) | 3;
     }
