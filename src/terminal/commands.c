@@ -3,7 +3,7 @@
 #include "arch/i386/io.h"
 #include "src/drivers/vga.h"
 #include "src/terminal/terminal.h"
-#include "lib/string.h"
+#include "lib/string/string.h"
 
 typedef struct{
     const char* name;

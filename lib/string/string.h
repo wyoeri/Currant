@@ -1,7 +1,7 @@
 #ifndef STRING_H
 #define STRING_H
 
-#include "lib/types.h"
+#include "lib/other/types.h"
 
 int strcom(const char* s1, const char* s2);
 int strlen(const char* s);

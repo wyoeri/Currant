@@ -3,7 +3,7 @@ section .multiboot
     dd 0x1BADB002
     dd 0x03
     dd -(0x1BADB002 + 0x03)
-section .bss
+section .stack  ;.bss
     align 4096
 stack_bottom:
     resb 65536
@@ -14,6 +14,8 @@ section .text
 _start:
     cli
     mov esp, stack_top
+    push eax 
+    push ebx 
     call kmain
 .loop:
     hlt

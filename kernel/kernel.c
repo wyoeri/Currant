@@ -1,23 +1,26 @@
-#include "lib/types.h"
+#include "arch/i386/multiboot.h"
 #include "arch/i386/gdt.h"
 #include "arch/i386/idt.h"
-#include "src/drivers/vga.h"
+#include "lib/other/types.h"
+#include "src/memory/paging.h"
 #include "src/drivers/keyboard.h"
 #include "src/terminal/terminal.h"
 
-void kmain(void){
-    gdt_init();
+void kmain(multiboot_info* mi, uint32_t signature_grub){
+    if(0x2BADB002 != signature_grub){__asm__ volatile("hlt"); return;}
+    init_gdt();
     remap_pic();
-    idt_init();
-    init_vga();
+    init_idt();
+    init_paging();
+    init_terminal();
     init_keyboard();
     __asm__ volatile("sti");
-    clear_screen_vga();
 
+    clear_screen();
     output_invitation();
 
     while(1) {
-        terminal();
+        input_processing_terminal();
         __asm__ volatile("hlt"); 
     }
 }

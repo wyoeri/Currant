@@ -1,7 +1,7 @@
 #ifndef RINGBUFFER_H
 #define RINGBUFFER_H
 
-#include "types.h"
+#include "other/types.h"
 
 typedef struct{
     uint8_t* buffer;

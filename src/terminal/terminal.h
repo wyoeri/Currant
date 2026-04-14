@@ -1,7 +1,7 @@
 #ifndef TERMINAL_H
 #define TERMINAL_H
 
-#include "lib/types.h"
+#include "lib/other/types.h"
 
 #define TERMINAL_BUFFER_SIZE 128
 #define DEFAULT_THEME 0x0F

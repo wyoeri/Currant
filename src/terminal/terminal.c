@@ -3,7 +3,7 @@
 #include "src/drivers/vga.h"
 #include "src/drivers/keyboard.h"
 #include "src/terminal/commands.h"
-#include "lib/string.h"
+
 
 typedef struct{
     int x;
