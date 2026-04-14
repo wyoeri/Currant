@@ -7,7 +7,7 @@ ISO_DIR = isodir
 BOOT_DIR = $(ISO_DIR)/boot
 GRUB_DIR = $(BOOT_DIR)/grub
 
-CFLAGS = -m32 -ffreestanding -fno-stack-protector -fno-pie -Wall -O2 -Iinclude -I.
+CFLAGS = -m32 -ffreestanding -fno-stack-protector -fno-pie -Wall -O2 -Iinclude -I. -I./lib
 LDFLAGS = -m elf_i386 -T linker.ld
 
 OBJ = $(BUILD_DIR)/boot.o \
@@ -22,8 +22,12 @@ OBJ = $(BUILD_DIR)/boot.o \
 	$(BUILD_DIR)/terminal.o \
 	$(BUILD_DIR)/commands.o \
 	$(BUILD_DIR)/string.o \
+	$(BUILD_DIR)/paging.o \
 	$(BUILD_DIR)/ringbuffer.o \
     $(BUILD_DIR)/statistics.o \
+	$(BUILD_DIR)/print.o \
+	$(BUILD_DIR)/kernel_panic.o \
+	$(BUILD_DIR)/error_msg_isr.o \
     $(BUILD_DIR)/interrupts.o
 
 all: prepare_iso
@@ -36,7 +40,7 @@ prepare_iso: $(BUILD_DIR)/currant.bin
 	cp $(BUILD_DIR)/currant.bin $(BOOT_DIR)/currant.bin
 	cp grub.cfg $(GRUB_DIR)/grub.cfg
 
-vpath %.c kernel:arch/i386:src/drivers:lib:src/terminal
+vpath %.c kernel:arch/i386:src/drivers:src/terminal:src/memory:lib/data_structures:lib/string:lib/print:lib/statistics:lib/other
 vpath %.asm arch/i386
 
 $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)

@@ -1,7 +1,7 @@
 #ifndef IDT_H
 #define IDT_H
 
-#include "lib/types.h"
+#include "lib/other/types.h"
 
 struct idt_entry{
     uint16_t base_lo;
@@ -18,6 +18,6 @@ struct idt_ptr{
 
 void remap_pic(void);
 void idt_set_gate(int num, uint32_t base, uint16_t sel_code, uint8_t type_attr);
-void idt_init(void);
+void init_idt(void);
 
 #endif

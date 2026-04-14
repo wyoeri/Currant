@@ -2,11 +2,11 @@
 #define KEYBOARD_H
 
 #include "arch/i386/isr.h"
-#include "lib/types.h"
+#include "lib/other/types.h"
 
 #define KEYBOARD_BUFFER_SIZE 256
 
-extern uint8_t kbd_us[128];
+extern char kbd_us[128];
 
 void init_keyboard(void);
 void handler_keyboard(void);

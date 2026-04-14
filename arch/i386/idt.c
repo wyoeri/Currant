@@ -29,7 +29,7 @@ void idt_set_gate(int num, uint32_t base, uint16_t sel_code, uint8_t type_attr){
     idt[num].base_hi = (base >> 16) & 0xFFFF;
 }
 
-void idt_init(void){
+void init_idt(void){
     iptr.limit = (sizeof(struct idt_entry) * 256) - 1;
     iptr.base = (uint32_t)&idt;
 

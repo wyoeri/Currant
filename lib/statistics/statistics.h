@@ -4,7 +4,7 @@
 #include "arch/i386/isr.h"
 #include "kernel/error_msg_isr.h"
 
-void print_info(const char* name, uint32_t val, int x, int y);
+void print_info(const char* name, uint32_t val);
 void output_registers_info(const registers* rg);
 void output_error(const registers* rg, const char* msg);
 void output_context(const registers* rg);
