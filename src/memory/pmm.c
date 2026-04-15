@@ -1,7 +1,5 @@
 #include "pmm.h"
 
-#include "src/terminal/terminal.h" //
-
 #define SYSTEM_INFO_SIZE 0x100000
 
 static volatile pmm_control pmm;
