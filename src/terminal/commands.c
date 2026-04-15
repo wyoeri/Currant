@@ -54,6 +54,7 @@ void cat(void){
 
 // snow help information
 void help(void){
+    print_str("Commands:\n1. red\n2. green\n3. black\n4. white\n5. cat\n6. reboot\n7. panic\n");
     print_str("Creator: wyoeri\n");
     print_str("More information: https://github.com/wyoeri/Currant/tree/main \n");
 }
