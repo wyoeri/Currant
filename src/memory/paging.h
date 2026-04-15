@@ -3,19 +3,27 @@
 
 #include "lib/other/types.h"
 
+#define PAGE_PRESENT (1 << 0)
+#define PAGE_RW (1 << 1)
+#define PAGE_US (1 << 2)
+#define PAGE_PWT (1 << 3)
+#define PAGE_PCD (1 << 4)
+#define PAGE_A (1 << 5)
+#define PAGE_D (1 << 6)
+#define PAGE_PS (1 << 7)
+#define PAGE_G (1 << 8)
+#define PAGE_AVL_1 (1 << 9)
+#define PAGE_AVL_2 (1 << 10)
+#define PAGE_AVL_3 (1 << 11)
+#define PAGE_FRAME 0xFFFFF000
+
 typedef struct{
-    uint32_t present : 1;
-    uint32_t rw : 1;
-    uint32_t memory_access : 1;
-    uint32_t pwt : 1;
-    uint32_t pcd : 1;
-    uint32_t accessed : 1;
-    uint32_t dirty : 1;
-    uint32_t pat : 1;
-    uint32_t global : 1;
-    uint32_t available : 3;
-    uint32_t frame : 20;
-} __attribute__((packed)) page_entry;
+    uint32_t pe[1024];
+} page_table __attribute__((aligned(4096)));
+
+typedef struct{
+    uint32_t pe[1024];
+} page_directory __attribute__((aligned(4096)));
 
 void init_paging(void);
 void load_page_directory(volatile uint32_t* directory);

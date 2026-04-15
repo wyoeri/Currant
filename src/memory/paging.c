@@ -2,24 +2,25 @@
 
 #include "src/memory/pmm.h"
 
-static volatile uint32_t* page_directory;
-static volatile uint32_t* page_table;
+volatile page_directory* kernel_pd = NULL;
 
 void init_paging(void){
-    page_directory = (uint32_t*)alloc_pmm();
-    page_table = (uint32_t*)alloc_pmm();
+    kernel_pd = (page_directory*)alloc_pmm();
+    page_table* first_pt = (page_table*)alloc_pmm(); 
 
     for(int i = 0; i < 1024; i++){
-        page_table[i] = (i * 4096) | 3;
+        kernel_pd->pe[i] = 0;
+        first_pt->pe[i] = 0;
     }
-
-    page_directory[0] = ((uint32_t)page_table) | 3;
-
+    
     for(int i = 1; i < 1024; i++){
-        page_directory[i] = 0 | 2;
+        first_pt->pe[i] = (i * 4096) | PAGE_PRESENT | PAGE_RW;
     }
+    
+    kernel_pd->pe[0] = ((uint32_t)first_pt) | PAGE_PRESENT | PAGE_RW;
+    kernel_pd->pe[1023] = ((uint32_t)kernel_pd) | PAGE_PRESENT | PAGE_RW;
 
-    load_page_directory(page_directory);
+    load_page_directory((uint32_t*)kernel_pd);
     enable_paging();
 }
 
