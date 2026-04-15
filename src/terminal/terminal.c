@@ -4,7 +4,6 @@
 #include "src/drivers/keyboard.h"
 #include "src/terminal/commands.h"
 
-
 typedef struct{
     int x;
     int y;
