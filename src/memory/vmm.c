@@ -10,7 +10,7 @@ void vmm_map_page(uint32_t vaddr, uint32_t paddr, uint32_t flags){
     uint32_t pt_idx = (vaddr >> 12) & 0x3FF;
 
     uint32_t* magic_pd = (uint32_t*)0xFFFFF000;
-    uint32_t* magic_pt = (uint32_t*)(0xFFC + (pd_idx * 4096));
+    uint32_t* magic_pt = (uint32_t*)(0xFFC00000 + (pd_idx * 4096));
 
     if(!(magic_pd[pd_idx] & PAGE_PRESENT)){
         uint32_t new_table = alloc_pmm();

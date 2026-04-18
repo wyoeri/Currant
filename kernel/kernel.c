@@ -20,7 +20,7 @@ void kmain(multiboot_info* mbi, uint32_t signature_grub){
 
     clear_screen();
     output_invitation();
-
+    
     while(1) {
         input_processing_terminal();
         __asm__ volatile("hlt"); 
