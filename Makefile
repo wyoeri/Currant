@@ -26,6 +26,7 @@ OBJ = $(BUILD_DIR)/boot.o \
 	$(BUILD_DIR)/multiboot.o \
 	$(BUILD_DIR)/pmm.o \
 	$(BUILD_DIR)/vmm.o \
+	$(BUILD_DIR)/kmalloc.o \
 	$(BUILD_DIR)/ringbuffer.o \
     $(BUILD_DIR)/statistics.o \
 	$(BUILD_DIR)/print.o \

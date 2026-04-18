@@ -52,6 +52,10 @@ void lock_pmm_region(uint32_t addr, uint32_t len){
     }
 }
 
+uint32_t get_end_kernel_area(void){
+    return (uint32_t)((uint32_t)&ebss + pmm.bitmap_size);
+}
+
 uint32_t alloc_pmm(void){
     for(uint32_t i = 0; i < pmm.bitmap_size / 4; i++){
         if(pmm.bitmap[i] != 0xFFFFFFFF){

@@ -37,7 +37,7 @@ void execute_command(char* command){
     }
 
     print_str(command);
-    print_str(" : command not found\n");
+    print_str(": command not found\n");
 }
 
 // system power control
