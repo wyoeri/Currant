@@ -17,7 +17,7 @@ int strlen(const char* s){
 }
 
 void* memset(void* dest, int c, size_t n){
-    uint8_t* p = dest;
+    volatile uint8_t* p = (uint8_t*)dest;
     while(n--){
         *p++ = (uint8_t)c;
     }
