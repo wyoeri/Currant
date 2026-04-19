@@ -19,18 +19,22 @@ void* kmalloc(size_t size){
                 next_block->size = current->size - size - sizeof(kmallfree);
                 next_block->is_free = 1;
                 next_block->next = current->next;
-
-                next_block->next = current->next; 
+ 
                 current->size = size;
                 current->next = next_block;
             }
             current->is_free = 0;
             return (void*)((uint8_t*)current + sizeof(kmallfree));
         }
+
+        if(NULL == current->next){break;}
+
         current = current->next;
     }
 
     uint32_t phys = alloc_pmm();
+    if(0 == phys){return NULL;}
+
     vmm_map_page(head_top, phys, PAGE_PRESENT | PAGE_RW);
 
     kmallfree* new = (kmallfree*)head_top;
@@ -42,15 +46,24 @@ void* kmalloc(size_t size){
         head = new;
     }
     else{
-        kmallfree* last = head;
-        while(last->next){last = last->next;}
-        last->next = new;
+        current->next = new;
     }
 
     head_top += 4096;
-    new->is_free = 0;
 
-    return (void*)((uint8_t*)new + sizeof(kmallfree));
+    return kmalloc(size);
+}
+
+void* kcalloc(size_t num, size_t size){
+    if(0 == num || 0 == size){return NULL;}
+    if(0 != num && size > SIZE_MAX / num){return NULL;}
+
+    size_t total = num * size;
+    void* ptr = kmalloc(total);
+
+    if(NULL == ptr){return NULL;}
+    memset(ptr, 0, total);
+    return ptr;
 }
 
 void kfree(void* ptr){

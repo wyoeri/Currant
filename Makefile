@@ -7,7 +7,7 @@ ISO_DIR = isodir
 BOOT_DIR = $(ISO_DIR)/boot
 GRUB_DIR = $(BOOT_DIR)/grub
 
-CFLAGS = -m32 -ffreestanding -fno-stack-protector -fno-pie -Wall -O2 -Iinclude -I. -I./lib
+CFLAGS = -m32 -ffreestanding -fno-stack-protector -fno-pie -Wall -O2 -std=gnu11 -Iinclude -I. -I./lib
 LDFLAGS = -m elf_i386 -T linker.ld
 
 OBJ = $(BUILD_DIR)/boot.o \

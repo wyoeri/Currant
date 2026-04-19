@@ -1,7 +1,6 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-#define NULL ((void*)0)
 typedef __PTRDIFF_TYPE__ ptrdiff_t;
 typedef __SIZE_TYPE__ size_t;
 typedef __UINT8_TYPE__   uint8_t;
@@ -14,5 +13,11 @@ typedef __INT32_TYPE__   int32_t;
 typedef __INT64_TYPE__   int64_t;
 typedef __UINTPTR_TYPE__ uintptr_t;
 typedef __INTPTR_TYPE__ intptr_t;
+typedef int bool;
+
+#define NULL ((void*)0)
+#define SIZE_MAX (~(size_t)0)
+#define true 1
+#define false 0
 
 #endif

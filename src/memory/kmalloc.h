@@ -10,6 +10,7 @@ typedef struct kmallfree{
 } kmallfree;
 
 void* kmalloc(size_t size);
+void* kcalloc(size_t num, size_t size);
 void kfree(void* ptr);
 size_t aligment(size_t size, size_t alig);
 
