@@ -27,6 +27,9 @@ OBJ = $(BUILD_DIR)/boot.o \
 	$(BUILD_DIR)/pmm.o \
 	$(BUILD_DIR)/vmm.o \
 	$(BUILD_DIR)/kmalloc.o \
+	$(BUILD_DIR)/scheduler.o \
+	$(BUILD_DIR)/switch_context.o \
+	$(BUILD_DIR)/timer.o \
 	$(BUILD_DIR)/ringbuffer.o \
     $(BUILD_DIR)/statistics.o \
 	$(BUILD_DIR)/print.o \
