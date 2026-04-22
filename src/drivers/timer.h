@@ -3,6 +3,8 @@
 
 #include "lib/other/types.h"
 
+#define DEFAULT_TIMER_FREQUENCY 250
+
 extern volatile uint32_t timer_frequency;
 
 // working with a timer
