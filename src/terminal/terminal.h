@@ -18,6 +18,7 @@ void print_coord_str(const char* s, int x, int y);
 
 // processing user input
 void input_processing_terminal(void);
+void char_handler(const char c);
 
 // working whith colors
 uint8_t get_theme_terminal(void);
