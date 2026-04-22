@@ -20,5 +20,6 @@ void black_theme(void);
 void white_theme(void);
 void red_theme(void);
 void green_theme(void);
+void blue_theme(void);
 
 #endif

@@ -20,6 +20,7 @@ terminalcommand tcommand[] = {
     {"white", white_theme},
     {"green", green_theme},
     {"red", red_theme},
+    {"blue", blue_theme}
 };
 
 #define COMMAND_COUNT (sizeof(tcommand) / sizeof(terminalcommand))
@@ -48,13 +49,19 @@ void reboot(void){
 
 // output ascii cat
 void cat(void){
-    print_str("  /\\_/\\\n ( o.o )\n  > ^ <\n");
-    print_str("meow\n");
+    print_str("\n"
+            "       |\\      _,,,---,,_\n"
+            " Zzz   /,`.-'`'    -.  ;-;;,_\n"
+            "      |,4-  ) )-,_. ,\\ (  `'-'\n"
+            "     '---''(_/--'  `-'\\_)\n\n");
 }
 
 // snow help information
 void help(void){
-    print_str("Commands:\n1. red\n2. green\n3. black\n4. white\n5. cat\n6. reboot\n7. panic\n");
+    print_str("Commands:\n");
+    print_str("black\twhite\tred\n");
+    print_str("green\tblue\tpanic\n");
+    print_str("reboot\thelp\tcat\n");
     print_str("Creator: wyoeri\n");
     print_str("More information: https://github.com/wyoeri/Currant/tree/main \n");
 }
@@ -82,5 +89,10 @@ void red_theme(void){
 
 void green_theme(void){
     set_theme_terminal(BLACK_COLOR, GREEN_COLOR);
+    clear_screen();
+}
+
+void blue_theme(void){
+    set_theme_terminal(BLACK_COLOR, BLUE_COLOR);
     clear_screen();
 }
