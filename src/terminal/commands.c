@@ -8,11 +8,10 @@
 typedef struct{
     const char* name;
     void(*func)(void);
-} terminalcommand;
+} terminalcommand_t;
 
-terminalcommand tcommand[] = {
-    {"reboot", reboot},
-    {"cat", cat},
+terminalcommand_t tcommand[] = {
+    {"kitty", kitty},
     {"help", help},
     {"panic", panic},
     {"clear", clear_screen},
@@ -23,7 +22,7 @@ terminalcommand tcommand[] = {
     {"blue", blue_theme}
 };
 
-#define COMMAND_COUNT (sizeof(tcommand) / sizeof(terminalcommand))
+#define COMMAND_COUNT (sizeof(tcommand) / sizeof(terminalcommand_t))
 
 void execute_command(char* command){
     if(NULL == command){return;}
@@ -41,14 +40,8 @@ void execute_command(char* command){
     print_str(": command not found\n");
 }
 
-// system power control
-void reboot(void){
-    outb(0x64, 0xFE);
-    while(1){__asm__ volatile("hlt");}
-}
-
-// output ascii cat
-void cat(void){
+// output ascii kitty
+void kitty(void){
     print_str("\n"
             "       |\\      _,,,---,,_\n"
             " Zzz   /,`.-'`'    -.  ;-;;,_\n"
@@ -61,7 +54,7 @@ void help(void){
     print_str("Commands:\n");
     print_str("black\twhite\tred\n");
     print_str("green\tblue\tpanic\n");
-    print_str("reboot\thelp\tcat\n");
+    print_str("reboot\thelp\tkitty\n");
     print_str("Creator: wyoeri\n");
     print_str("More information: https://github.com/wyoeri/Currant/tree/main \n");
 }
