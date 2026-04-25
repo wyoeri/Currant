@@ -3,11 +3,8 @@
 
 void execute_command(char* command);
 
-// system power control
-void reboot(void);
-
-// output ascii cat
-void cat(void);
+// output ascii kitty
+void kitty(void);
 
 // snow help information
 void help(void);
