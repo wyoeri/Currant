@@ -1,5 +1,4 @@
 [BITS 32]
-
 section .text
 global switch_context
 switch_context:

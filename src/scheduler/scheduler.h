@@ -15,7 +15,7 @@ typedef struct{
     uint32_t eax;
     uint32_t eip;
     uint32_t eflags;
-} scheduler_registers_t;
+} __attribute__((packed)) scheduler_registers_t;
 
 // task states
 typedef enum{
@@ -25,13 +25,14 @@ typedef enum{
     TASK_ZOMBIE
 } task_state_t;
 
-// TCB(task control block)
+// TCB(Task Control Block)
 typedef struct task{
     uint32_t pid_task;
-    uint32_t kernel_stack_task;
+    uint32_t esp;
     uint32_t wake_tick;
     task_state_t state_task;
     struct task* next_task;
+    uint32_t* stack_base;
 } task_t;
 
 extern void switch_context(uint32_t* old_esp, uint32_t new_esp);
@@ -44,6 +45,7 @@ void loop_schedule(void);
 
 // working with tasks
 task_t* create_task(void(*func)(void));
+void handler_task(void(*func)(void));
 void exit_task(void);
 void update_sleep_tasks(uint32_t current_timer_tisk);
 

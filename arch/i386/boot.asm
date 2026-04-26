@@ -3,7 +3,7 @@ section .multiboot
     dd 0x1BADB002
     dd 0x03
     dd -(0x1BADB002 + 0x03)
-section .stack  ;.bss
+section .stack
     align 4096
 stack_bottom:
     resb 65536

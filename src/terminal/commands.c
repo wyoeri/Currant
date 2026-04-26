@@ -54,7 +54,7 @@ void help(void){
     print_str("Commands:\n");
     print_str("black\twhite\tred\n");
     print_str("green\tblue\tpanic\n");
-    print_str("reboot\thelp\tkitty\n");
+    print_str("\thelp\tkitty\n");
     print_str("Creator: wyoeri\n");
     print_str("More information: https://github.com/wyoeri/Currant/tree/main \n");
 }

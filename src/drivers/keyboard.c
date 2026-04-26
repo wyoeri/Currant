@@ -4,7 +4,7 @@
 #include "arch/i386/io.h"
 
 static uint8_t kbd_mem[KEYBOARD_BUFFER_SIZE];
-static ring_buffer kbd_rb;
+static ring_buffer_t kbd_rb;
 
 void init_keyboard(void){
     init_buffer(&kbd_rb, kbd_mem, KEYBOARD_BUFFER_SIZE);

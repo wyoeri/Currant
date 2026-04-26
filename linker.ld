@@ -4,13 +4,9 @@ SECTIONS
 {
     . = 0x100000;
 
-    .multiboot ALIGN(4K) :
-    {
-        *(.multiboot)
-    }
-
     .text BLOCK(4K) : ALIGN(4K)
     {
+        *(.multiboot)
         *(.text)
     }
 
@@ -24,17 +20,16 @@ SECTIONS
         *(.data)
     }
 
-     .stack BLOCK(4K) : ALIGN(4K)
-    {
-        *(.stack) 
-    }
-
     .bss BLOCK(4K) : ALIGN(4K)
     {
         *(COMMON)
         *(.bss)
+        *(.stack)
     }
+
+    . = ALIGN(4K);
     ebss = .;
+    
     /DISCARD/ :
     {
         *(.comment)

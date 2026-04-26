@@ -2,9 +2,9 @@
 
 #define SYSTEM_INFO_SIZE 0x100000
 
-static volatile pmm_control pmm;
+static volatile pmm_control_t pmm;
 
-void init_pmm(multiboot_info* mbi){
+void init_pmm(multiboot_info_t* mbi){
     uint32_t max_addr = get_max_address(mbi);
     pmm.bitmap = (uint32_t*)&ebss;
     pmm.total_frames = max_addr / 4096;
@@ -15,12 +15,12 @@ void init_pmm(multiboot_info* mbi){
         pmm.bitmap[i] = 0xFFFFFFFF;
     }
     
-    mmap_multiboot_info* mmap_mbi = (mmap_multiboot_info*)mbi->mmap_addr;
+    mmap_multiboot_info_t* mmap_mbi = (mmap_multiboot_info_t*)mbi->mmap_addr;
     while((uint32_t)mmap_mbi < mbi->mmap_addr + mbi->mmap_len){
         if(1 == mmap_mbi->type){
             init_pmm_region((uint32_t)mmap_mbi->addr, (uint32_t)mmap_mbi->len);
         }
-        mmap_mbi = (mmap_multiboot_info*)((uint32_t)mmap_mbi + mmap_mbi->size + 4);
+        mmap_mbi = (mmap_multiboot_info_t*)((uint32_t)mmap_mbi + mmap_mbi->size + 4);
     }
     
     uint32_t end_kernel = (uint32_t)&ebss + pmm.bitmap_size;

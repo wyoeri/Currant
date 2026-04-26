@@ -1,9 +1,9 @@
 #include "multiboot.h"
 
-uint32_t get_max_address(multiboot_info* mbi){
+uint32_t get_max_address(multiboot_info_t* mbi){
     if(!(mbi->flags & (1 << 6))){return 0;}
 
-    mmap_multiboot_info* mmap_mbi = (mmap_multiboot_info*)mbi->mmap_addr;
+    mmap_multiboot_info_t* mmap_mbi = (mmap_multiboot_info_t*)mbi->mmap_addr;
 
     uint32_t max_addr = 0;
 
@@ -14,7 +14,7 @@ uint32_t get_max_address(multiboot_info* mbi){
                 max_addr = region_end;
             }
         }
-        mmap_mbi = (mmap_multiboot_info*)((uint32_t)mmap_mbi + mmap_mbi->size + sizeof(mmap_mbi->size));
+        mmap_mbi = (mmap_multiboot_info_t*)((uint32_t)mmap_mbi + mmap_mbi->size + sizeof(mmap_mbi->size));
     }
     return max_addr;
 }

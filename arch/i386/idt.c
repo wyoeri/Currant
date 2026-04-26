@@ -5,8 +5,8 @@
 
 extern void idt_load(uint32_t);
 
-struct idt_entry idt[256];
-struct idt_ptr iptr;
+static idt_entry_t idt[256];
+static idt_ptr_t iptr;
 
 void remap_pic(void){
     outb(0x20, 0x11);
@@ -30,7 +30,7 @@ void idt_set_gate(int num, uint32_t base, uint16_t sel_code, uint8_t type_attr){
 }
 
 void init_idt(void){
-    iptr.limit = (sizeof(struct idt_entry) * 256) - 1;
+    iptr.limit = (sizeof(idt_entry_t) * 256) - 1;
     iptr.base = (uint32_t)&idt;
 
     for(uint16_t i = 0; i < 256; i++){

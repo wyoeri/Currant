@@ -3,6 +3,6 @@
 
 #include "arch/i386/isr.h"
 
-void kernel_panic(registers* rg);
+void kernel_panic(registers_t* rg);
 
 #endif
