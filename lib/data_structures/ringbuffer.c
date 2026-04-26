@@ -1,6 +1,6 @@
 #include "ringbuffer.h"
 
-void init_buffer(ring_buffer* rb, uint8_t* memory, size_t size){
+void init_buffer(ring_buffer_t* rb, uint8_t* memory, size_t size){
     rb->buffer = memory;
     rb->head = 0;
     rb->tail = 0;
@@ -8,7 +8,7 @@ void init_buffer(ring_buffer* rb, uint8_t* memory, size_t size){
     rb->size = size;
 }
 
-int pushrb(ring_buffer* rb, uint8_t data){
+bool pushrb(ring_buffer_t* rb, uint8_t data){
     if(rb->count == rb->size){return 0;}
 
     rb->buffer[rb->head] = data;
@@ -17,10 +17,10 @@ int pushrb(ring_buffer* rb, uint8_t data){
 
     rb->count++;
 
-    return 1;
+    return true;
 }
 
-int poprb(ring_buffer* rb){
+int poprb(ring_buffer_t* rb){
     if(rb->count == 0){return -1;}
 
     uint8_t val = rb->buffer[rb->tail];

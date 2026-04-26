@@ -28,15 +28,15 @@ typedef struct{
     uint16_t vbe_interface_seg;
     uint16_t vbe_interface_off;
     uint16_t vbe_interface_len;
-} __attribute__((packed)) multiboot_info;
+} __attribute__((packed)) multiboot_info_t;
 
 typedef struct{
     uint32_t size;
     uint64_t addr;
     uint64_t len;
     uint32_t type;
-} __attribute__((packed)) mmap_multiboot_info;
+} __attribute__((packed)) mmap_multiboot_info_t;
 
-uint32_t get_max_address(multiboot_info* mbi);
+uint32_t get_max_address(multiboot_info_t* mbi);
 
 #endif

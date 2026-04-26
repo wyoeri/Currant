@@ -51,7 +51,18 @@ void* kmalloc(size_t size){
 
     head_top += 4096;
 
-    return kmalloc(size);
+    if(new->size >= sizeof(kmallfree) + size + 4){
+        kmallfree* next_block = (kmallfree*)((uint8_t*)new + sizeof(kmallfree) + size);
+        next_block->size = new->size - size - sizeof(kmallfree);
+        next_block->is_free = 1;
+        next_block->next = new->next;
+
+        new->size = size;
+        new->next = next_block;
+    }
+
+    new->is_free = 0;
+    return (void*)((uint8_t*)new + sizeof(kmallfree));
 }
 
 void* kcalloc(size_t num, size_t size){

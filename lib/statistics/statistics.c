@@ -10,7 +10,7 @@ void print_info(const char* name, uint32_t val){
     print_char('\n');
 }
 
-void output_registers_info(const registers* rg){
+void output_registers_info(const registers_t* rg){
     print_info("EAX", rg->eax);
     print_info("ECX", rg->ecx);
     print_info("EDX", rg->edx);
@@ -21,20 +21,20 @@ void output_registers_info(const registers* rg){
     print_info("EIP", rg->eip);
 }
 
-void output_error(const registers* rg, const char* msg){
+void output_error(const registers_t* rg, const char* msg){
     print_str(msg);
     print_str(error_messages_isr[rg->int_no]);
     print_char('\n');
     print_info("ERROR CODE", rg->err_code);
 }
 
-void output_context(const registers* rg){
+void output_context(const registers_t* rg){
     print_info("USERESP", rg->useresp);
     print_info("DS", rg->ds);
     print_info("CS", rg->cs);
     print_info("SS", rg->ss);
 }
 
-void output_flags(const registers* rg){
+void output_flags(const registers_t* rg){
     print_info("EFLAGS", rg->eflags);
 }

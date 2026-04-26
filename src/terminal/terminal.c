@@ -79,6 +79,12 @@ void input_processing_terminal(void){
            char_handler('\b'); 
         }
     }
+    else if(' ' == c){
+        if(index_term >= 0 && index_term < 128){
+            buffer_term[index_term++] = '\0';
+            char_handler(' ');
+        }
+    }
     else if(index_term < TERMINAL_BUFFER_SIZE - 1){
         buffer_term[index_term++] = c;
         char_handler(c); 
@@ -135,8 +141,7 @@ uint8_t get_theme_terminal(void){
 }
 
 void set_theme_terminal(uint8_t fg, uint8_t bg){
-    uint8_t color = make_color_terminal(fg, bg);
-    theme_terminal = color;
+    theme_terminal = make_color_terminal(fg, bg);
 }
 
 uint8_t make_color_terminal(uint8_t fg, uint8_t bg){

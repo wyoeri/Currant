@@ -12,9 +12,9 @@ typedef struct{
     uint32_t used_frames;
     uint32_t bitmap_size;
     uint32_t last_index;
-} pmm_control;
+} pmm_control_t;
 
-void init_pmm(multiboot_info* mbi);
+void init_pmm(multiboot_info_t* mbi);
 void set_frame_pmm(uint32_t addr);
 void unset_frame_pmm(uint32_t addr);
 void init_pmm_region(uint32_t addr, uint32_t len);

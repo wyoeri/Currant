@@ -2,22 +2,23 @@
 
 #include "lib/statistics/statistics.h"
 #include "src/terminal/terminal.h"
+#include "src/drivers/vga.h"
 
-static int in_handler = 0;
+static volatile int in_handler = 0;
 
-void kernel_panic(registers* rg){
+void kernel_panic(registers_t* rg){
     asm volatile("cli");
 
     if(in_handler){__asm__ volatile("hlt");}
     in_handler = 1;
 
-    set_theme_terminal(0x00, 0x04);
+    set_theme_terminal(BLACK_COLOR, RED_COLOR);
 
     clear_screen();
     print_str("KERNEL PANIC!\n");
     print_str("A fatal exception has occurred\n");
     print_str("System halted to prevent damage\n");
-    print_str("Please reboot!\n\n");
+    print_str("Please reboot!\n");
     print_str("Information:\n");
 
     if(rg->int_no < 34){
