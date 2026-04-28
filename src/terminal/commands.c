@@ -55,8 +55,8 @@ void help(void){
     print_str("black\twhite\tred\n");
     print_str("green\tblue\tpanic\n");
     print_str("\thelp\tkitty\n");
-    print_str("Creator: wyoeri\n");
-    print_str("More information: https://github.com/wyoeri/Currant/tree/main \n");
+    print_str("Creator: whyoeri\n");
+    print_str("More information: https://github.com/whyoeri/Currant \n");
 }
 
 // trigger kernel panic
