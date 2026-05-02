@@ -55,12 +55,7 @@ void print_coord_str(const char* s, int x, int y){
 
 // processing user input
 void input_processing_terminal(void){
-    int sc = get_scancode_keyboard();
-
-    if(-1 == sc){return;}
-    if(sc & 0x80){return;}
-
-    char c = kbd_us[sc];
+    char c = get_char_keyboard();
     if(0 == c){return;}
 
     if('\n' == c){
