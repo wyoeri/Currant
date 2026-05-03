@@ -4,6 +4,7 @@
 #include "src/drivers/vga.h"
 #include "src/terminal/terminal.h"
 #include "lib/string/string.h"
+#include "lib/other/types.h"
 
 typedef struct{
     const char* name;
@@ -25,19 +26,31 @@ terminalcommand_t tcommand[] = {
 #define COMMAND_COUNT (sizeof(tcommand) / sizeof(terminalcommand_t))
 
 void execute_command(char* command){
-    if(NULL == command){return;}
-
-    if('\0' == command[0]){return;}
+    if(NULL == command || '\0' == command[0]){return;}
     
-    for(int i = 0; i < COMMAND_COUNT; i++){
-        if(0 == strcom(command, tcommand[i].name)){
-            tcommand[i].func();
+    while(' ' == *command){command++;}
+
+    char* name = command;
+    int i = 0;
+    while(' ' != command[i] && '\0' != command[i]){i++;}
+    
+    char separator = command[i];
+    command[i] = '\0';
+
+    if('\0' == name[0]){command[i] = separator; return;}
+
+    for(int j = 0; j < COMMAND_COUNT; j++){
+        if(0 == strcom(name, tcommand[j].name)){
+            tcommand[j].func();
+            command[i] = separator; 
             return;
         }
     }
 
-    print_str(command);
+    print_str(name);
     print_str(": command not found\n");
+
+    command[i] = separator;
 }
 
 // output ascii kitty
@@ -52,9 +65,9 @@ void kitty(void){
 // snow help information
 void help(void){
     print_str("Commands:\n");
-    print_str("black\twhite\tred\n");
-    print_str("green\tblue\tpanic\n");
-    print_str("\thelp\tkitty\n");
+    print_str("black  white  red\n");
+    print_str("green  blue  panic\n");
+    print_str("help  kitty\n");
     print_str("Creator: whyoeri\n");
     print_str("More information: https://github.com/whyoeri/Currant \n");
 }

@@ -37,13 +37,13 @@ void print_str(const char* s){
 }
 
 // printing by coordinates
-void print_coord_char(const char c, int x, int y){
+void print_coord_char(const char c, const int x, const int y){
     tcs.y = y;
     tcs.x = x;
     put_vga(c, theme_terminal, tcs.x, tcs.y);
 }
 
-void print_coord_str(const char* s, int x, int y){
+void print_coord_str(const char* s, const int x, const int y){
     tcs.y = y;
     tcs.x = x;
     while('\0' != *s){
@@ -56,7 +56,7 @@ void print_coord_str(const char* s, int x, int y){
 // processing user input
 void input_processing_terminal(void){
     char c = get_char_keyboard();
-    if(0 == c){return;}
+    if(0 == c || '\t' == c){return;}
 
     if('\n' == c){
         char_handler('\n');
@@ -65,19 +65,10 @@ void input_processing_terminal(void){
         index_term = 0;
         output_invitation();
     }
-    else if('\t' == c){
-        char_handler('\t');
-    }
     else if('\b' == c){
         if(index_term > 0){
            buffer_term[--index_term] = '\0';
            char_handler('\b'); 
-        }
-    }
-    else if(' ' == c){
-        if(index_term >= 0 && index_term < 128){
-            buffer_term[index_term++] = '\0';
-            char_handler(' ');
         }
     }
     else if(index_term < TERMINAL_BUFFER_SIZE - 1){
@@ -91,33 +82,15 @@ void char_handler(const char c){
         tcs.x = 0; 
         tcs.y++;
     }
-    else if('\t' == c){
-        int new_x = (tcs.x + 4) & ~3;
-        if(new_x <  SIZE_ROW){
-            tcs.x = new_x;
-        }
-        else{
-            tcs.x = 0;
-            tcs.y++;
-        }
-    }
     else if('\b' == c){
         if(tcs.x > 0){
             tcs.x--;
             put_vga(' ', theme_terminal, tcs.x, tcs.y);
         }
     }
-    else if(' ' == c){
-        if(tcs.x < SIZE_ROW){
-            put_vga(' ', theme_terminal, tcs.x, tcs.y);
-            tcs.x++;
-        }
-    }
     else{
-        if(tcs.x < SIZE_ROW){
-            put_vga(c, theme_terminal, tcs.x, tcs.y);
-            tcs.x++;
-        }
+        put_vga(c, theme_terminal, tcs.x, tcs.y);
+        tcs.x++;
     }
 
     if(tcs.x >= SIZE_ROW){
@@ -135,11 +108,11 @@ uint8_t get_theme_terminal(void){
     return theme_terminal;
 }
 
-void set_theme_terminal(uint8_t fg, uint8_t bg){
+void set_theme_terminal(const uint8_t fg, const uint8_t bg){
     theme_terminal = make_color_terminal(fg, bg);
 }
 
-uint8_t make_color_terminal(uint8_t fg, uint8_t bg){
+uint8_t make_color_terminal(const uint8_t fg, const uint8_t bg){
     return (bg << 4) | fg;
 }
 
